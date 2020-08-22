@@ -9,29 +9,33 @@
                     <a routerLink="about" class="rk-menu__link">Acerca de</a>
                 </li>
             </ul>
-            <p class="rk-footer__text rk-footer__copy "> <span class="ae-u-bold">© </span><span class="ae-u-bolder">{{ anio }} Catálogo Respuestos Net </span>Todos lod Derechos Reservados.</p>
+            <p class="rk-footer__text rk-footer__copy "> <span class="ae-u-bold">© </span><span class="ae-u-bolder">{{ anio }} {{ infoPaginaService.info.titulo}} </span>Todos los Derechos Reservados.</p>
         </div>
         <div class="ae-grid__item item-lg-4 au-xs-ta-center">
-            <a href="#0" class="rk-social-btn ">
+            <a target="_blank" [href]="infoPaginaService.info.facebook" class="rk-social-btn ">
                 <svg>
-            <use xlink:href="assets/img/symbols.svg#icon-facebook"></use>
-          </svg></a>
-            <a href="#0" class="rk-social-btn ">
+                    <use xlink:href="assets/img/symbols.svg#icon-facebook"></use>
+                </svg>
+            </a>
+            <a target="_blank" [href]="infoPaginaService.info.twitter" class="rk-social-btn ">
                 <svg>
-            <use xlink:href="assets/img/symbols.svg#icon-twitter"></use>
-          </svg></a>
-            <a href="#0" class="rk-social-btn ">
+                    <use xlink:href="assets/img/symbols.svg#icon-twitter"></use>
+                </svg>
+            </a>
+            <a target="_blank" [href]="infoPaginaService.info.instagram" class="rk-social-btn ">
                 <svg>
-            <use xlink:href="assets/img/symbols.svg#icon-pinterest"></use>
-          </svg></a>
-            <a href="#0" class="rk-social-btn ">
+                    <use xlink:href="assets/img/symbols.svg#icon-pinterest"></use>
+                </svg>
+            </a>
+            <a target="_blank" [href]="infoPaginaService.info.tublr" class="rk-social-btn ">
                 <svg>
-            <use xlink:href="assets/img/symbols.svg#icon-tumblr"></use>
-          </svg></a>
+                    <use xlink:href="assets/img/symbols.svg#icon-tumblr"></use>
+                </svg>
+            </a>
         </div>
         <div class="ae-grid__item item-lg-4 au-xs-ta-center au-lg-ta-right">
-            <p class="rk-footer__text rk-footer__contact "> <span class="ae-u-bold">Email: </span><span class="ae-u-bolder"> <a href="#0" class="rk-dark-color ">contacto@catalogorepuestosnet.com </a></span></p>
-            <p class="rk-footer__text rk-footer__by">Desarrollado por <a href="http://dexterbits.com" class="ae-u-bolder" target="_blank">Dexterbits Soluciones Informáticas</a></p>
+            <p class="rk-footer__text rk-footer__contact "> <span class="ae-u-bold">Email: </span><span class="ae-u-bolder"> <a href="mailTo:{{ infoPaginaService.info.email }}" class="rk-dark-color ">{{ infoPaginaService.info.email}} </a></span></p>
+            <p class="rk-footer__text rk-footer__by">Desarrollado por <a href="{{infoPaginaService.info.pagina_autor}}" class="ae-u-bolder" target="_blank">{{ infoPaginaService.info.nombre_corto}}</a></p>
         </div>
     </div>
 </footer>
