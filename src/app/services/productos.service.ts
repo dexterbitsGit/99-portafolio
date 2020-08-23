@@ -7,28 +7,67 @@ import { InfoProductosIdx } from '../interfaces/info-productos.interface';
 })
 export class ProductosService {
   cargando = true;
-
   productos: InfoProductosIdx[] = [];
+  productosFiltrado: InfoProductosIdx[] = [];
 
   constructor(private http: HttpClient) {
     this.cargarProductos();
   }
 
   private cargarProductos() {
-    this.http
-      .get(
-        'https://portafoliocatalogoproductos.firebaseio.com/productos_idx.json'
-      )
-      .subscribe((resp: InfoProductosIdx[]) => {
-        this.productos = resp;
-        console.log('Estos son Mis productos', resp);
+    return new Promise((resolve, reject) => {
+      this.http
+        .get(
+          'https://portafoliocatalogoproductos.firebaseio.com/productos_idx.json'
+        )
+        .subscribe((resp: InfoProductosIdx[]) => {
+          this.productos = resp;
+          this.cargando = false;
+          resolve();
+          // setTimeout(() => {
+          //   this.productos = resp;
+          //   this.cargando = false;
+          // }, 2000);
+        });
+    });
+  }
 
-        this.cargando = false;
+  public getProducto(id: string) {
+    return this.http.get(
+      `https://portafoliocatalogoproductos.firebaseio.com/productos/${id}.json`
+    );
+  }
 
-        // setTimeout(() => {
-        //   this.productos = resp;
-        //   this.cargando = false;
-        // }, 2000);
+  public buscarProducto(termino: string) {
+    if (this.productos.length === 0) {
+      // cargar productos
+      this.cargarProductos().then(() => {
+        // ejecutar despues de tener los productos
+        // Aplicar Filtros
+        this.filtrarProductos(termino);
       });
+    } else {
+      // aplicar el filtro
+      this.filtrarProductos(termino);
+    }
+
+    console.log(this.productosFiltrado);
+  }
+
+  private filtrarProductos(termino: string) {
+
+    this.productosFiltrado = [];
+    termino = termino.toLocaleLowerCase();
+
+    this.productos.forEach((prod) => {
+      const tituloLower = prod.titulo.toLocaleLowerCase();
+
+      if (
+        prod.categoria.indexOf(termino) >= 0 ||
+        tituloLower.indexOf(termino) >= 0
+      ) {
+        this.productosFiltrado.push(prod);
+      }
+    });
   }
 }
