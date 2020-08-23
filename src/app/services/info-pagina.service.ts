@@ -32,7 +32,6 @@ export class InfoPaginaService {
     this.http.get('https://portafoliocatalogoproductos.firebaseio.com/equipo.json')
         .subscribe( (resp: InfoEquipo[]) => {
           this.infoEquipo = resp;
-          //console.log('este es el objeto equipo', resp);
         });
   }
 }
