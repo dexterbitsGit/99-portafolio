@@ -51,7 +51,6 @@ export class ProductosService {
       this.filtrarProductos(termino);
     }
 
-    console.log(this.productosFiltrado);
   }
 
   private filtrarProductos(termino: string) {
